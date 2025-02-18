@@ -15,6 +15,8 @@ public class Ventana extends JFrame implements ActionListener {
     private JCheckBox chkRecordarContrasena;
     private JLabel etiqueta2;
     private JLabel etiqueta3;
+    private String correoB = "Iankarel@gmail.com";
+    private String contraseñaB = "12345";
 
     public Ventana() {
         configurarVentana();
@@ -23,7 +25,7 @@ public class Ventana extends JFrame implements ActionListener {
 
     private void configurarVentana() {
         setSize(500, 400);
-        setTitle("Login");
+        setTitle("Iniciar sesion");
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,10 +39,15 @@ public class Ventana extends JFrame implements ActionListener {
         	etiqueta2.setBounds(140, 300, 250, 25);
             etiqueta2.setText("Por favor, complete todos los campos");
             etiqueta2.setForeground(Color.RED);
-        } else {
+        } else if (correo.equals(correoB) && contraseña.equals(contraseñaB) ){
         	etiqueta2.setBounds(170, 300, 250, 25);
             etiqueta2.setText("Inicio de sesion exitoso");
             etiqueta2.setForeground(Color.GREEN);
+        }
+        else {
+        	etiqueta2.setBounds(150, 300, 250, 25);
+            etiqueta2.setText("Correo o contraseña incorrectos");
+            etiqueta2.setForeground(Color.RED);
         }
     }
 
@@ -80,25 +87,28 @@ public class Ventana extends JFrame implements ActionListener {
 
         // CheckBox de recordar contraseña
         chkRecordarContrasena = new JCheckBox("Recordar contraseña");
-        chkRecordarContrasena.setBounds(170, 200, 150, 25);
+        chkRecordarContrasena.setBounds(170, 210, 150, 25);
+        chkRecordarContrasena.setBackground(Color.WHITE);
         panel.add(chkRecordarContrasena);
 
         // Boton de inicio de sesion
         botonIS = new JButton("Iniciar sesión");
-        botonIS.setBounds(180, 250, 120, 30);
+        botonIS.setBounds(180, 260, 120, 30);
         panel.add(botonIS);
         botonIS.addActionListener(this);
         
         //Etiquet de olvido su contrsaeña
         etiqueta3 = new JLabel("¿Olvido su contraseña?");
-        etiqueta3.setBounds(190, 175, 150, 20);
+        etiqueta3.setBounds(270, 175, 150, 20);
         etiqueta3.setFont(new Font("Arial", Font.BOLD, 10));
+        etiqueta3.setForeground(Color.BLUE);
         panel.add(etiqueta3);
 
 
         // Etiqueta de mensaje
         etiqueta2 = new JLabel("");
         panel.add(etiqueta2);
+        
     }
 
     public static void main(String[] args) {

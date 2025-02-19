@@ -116,8 +116,14 @@ public class Ventana extends JFrame implements ActionListener {
         etiqueta3.setFont(new Font("Arial", Font.BOLD, 10));
         etiqueta3.setForeground(Color.BLUE);
         panel.add(etiqueta3);
-
-
+        
+        //Boton calculadora 
+        
+        JButton botonCal = new JButton("Calculadora");
+        botonCal.setBounds(140, 460,200, 30);
+        panel.add(botonCal);
+        botonCal.addActionListener(e -> panelCalculadora());
+        
         // Etiqueta de mensaje
         etiqueta2 = new JLabel("");
         panel.add(etiqueta2);
@@ -238,7 +244,7 @@ public class Ventana extends JFrame implements ActionListener {
         //Crear grupo de botones
         
         ButtonGroup botonesTyC = new ButtonGroup();
-        botonesTyC.add(RBoton5);
+        botonesTyC.add(RBoton4);
         botonesTyC.add(RBoton5);
         
         //Boton crear cuenta
@@ -277,13 +283,78 @@ public class Ventana extends JFrame implements ActionListener {
         etiquetaC.setFont(new Font("Arial", Font.BOLD, 30));
         cuenta.add(etiquetaC);
 
-        
-        
         setContentPane(cuenta);
         revalidate();
+        repaint();   
+    }
+    
+    //panel calculadora
+    
+    private void panelCalculadora() {
+    	
+        JPanel calculadora = new JPanel();
+        calculadora.setBackground(Color.BLACK);
+        calculadora.setLayout(null);
+        setContentPane(calculadora);
+
+        // Pantalla de la calculadora
+        JTextField pantalla = new JTextField("0");
+        pantalla.setBounds(30, 30, 425, 70);
+        pantalla.setEditable(false);
+        pantalla.setHorizontalAlignment(JTextField.RIGHT);
+        pantalla.setFont(new Font("Arial", Font.BOLD, 29));
+        calculadora.add(pantalla);
+
+        // Botón de "CE"
+        JButton botonCE = new JButton("CE");
+        botonCE.setBounds(30, 115, 95, 65);
+        botonCE.setFont(new Font("Arial", Font.BOLD, 18));
+        botonCE.setBackground(Color.LIGHT_GRAY);
+        calculadora.add(botonCE);
+        
+        JPanel espacioVacio = new JPanel();
+        espacioVacio.setBounds(140, 115, 315, 65);
+        espacioVacio.setBackground(Color.GRAY);
+        calculadora.add(espacioVacio);
+        
+        
+        String[][] botones = {
+                {"7", "8", "9", "/"},
+                {"4", "5", "6", "*"},
+                {"1", "2", "3", "-"},
+                {"0", ".", "=", "+"}
+            };
+
+            int x = 30, y = 195;
+
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+
+                    JButton boton = new JButton(botones[i][j]);
+                    boton.setBounds(x, y, 95, 65);
+                    boton.setFont(new Font("Arial", Font.BOLD, 20));
+                    boton.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
+                    if ("/*-+=.".contains(botones[i][j])) {
+                        boton.setBackground(new Color(255, 140, 0));
+                        boton.setForeground(Color.WHITE);
+                    }
+                    calculadora.add(boton);
+                    x += 110;
+                }
+                x = 30;
+                y += 75;
+            }
+
+        // Botón para regresar
+        JButton botonBack = new JButton("Salir");
+        botonBack.setBounds(30, 510, 80, 30);
+        botonBack.setForeground(Color.RED);
+        botonBack.addActionListener(e -> inicializarComponentes());
+        calculadora.add(botonBack);
+
+        setContentPane(calculadora);
+        revalidate();
         repaint();
-        
-        
     }
 
 

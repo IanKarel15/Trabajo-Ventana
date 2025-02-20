@@ -44,7 +44,7 @@ public class Ventana extends JFrame implements ActionListener {
         	etiqueta2.setBounds(170, 360, 250, 25);
             etiqueta2.setText("Inicio de sesion exitoso");
             etiqueta2.setForeground(Color.GREEN);
-            botonIS.addActionListener(e -> panelCuenta());
+            botonIS.addActionListener(e -> panelMenu());
             
         }
         else {
@@ -117,12 +117,12 @@ public class Ventana extends JFrame implements ActionListener {
         etiqueta3.setForeground(Color.BLUE);
         panel.add(etiqueta3);
         
-        //Boton calculadora 
+        /*//Boton calculadora 
         
         JButton botonCal = new JButton("Calculadora");
         botonCal.setBounds(140, 460,200, 30);
         panel.add(botonCal);
-        botonCal.addActionListener(e -> panelCalculadora());
+        botonCal.addActionListener(e -> panelCalculadora());*/
         
         // Etiqueta de mensaje
         etiqueta2 = new JLabel("");
@@ -290,7 +290,7 @@ public class Ventana extends JFrame implements ActionListener {
     
     //panel calculadora
     
-    private void panelCalculadora() {
+    /*private void panelCalculadora() {
     	
         JPanel calculadora = new JPanel();
         calculadora.setBackground(Color.BLACK);
@@ -355,7 +355,85 @@ public class Ventana extends JFrame implements ActionListener {
         setContentPane(calculadora);
         revalidate();
         repaint();
-    }
+    }*/
+    
+    public void panelMenu () {
+    	
+    	JPanel menu = new JPanel ();
+    	menu.setBackground(Color.LIGHT_GRAY);
+    	menu.setLayout(null);
+    	setContentPane(menu);
+    	
+    	JLabel usuarios = new JLabel ("Usuarios");
+    	usuarios.setBounds(170, 30, 150, 40);
+    	menu.add(usuarios);
+    	usuarios.setFont(new Font("Arial", Font.BOLD, 30));
+    	
+    	JLabel totalUsuarios = new JLabel ("Total de usuarios");
+    	totalUsuarios.setBounds(20, 80, 200, 40);
+    	menu.add(totalUsuarios);
+    	totalUsuarios.setBackground(Color.BLACK);
+    	totalUsuarios.setForeground(Color.WHITE);
+    	totalUsuarios.setFont(new Font("Arial", Font.BOLD, 20));
+    	
+    	JLabel numUsuarios = new JLabel ("100");
+    	numUsuarios.setBounds(60, 120, 150, 40);
+    	menu.add(numUsuarios);
+    	numUsuarios.setBackground(Color.BLACK);
+    	numUsuarios.setForeground(Color.WHITE);
+    	numUsuarios.setFont(new Font("Arial", Font.BOLD, 30));
+    	
+    	String[] columnNames = {"First Name",
+                "Last Name",
+                "Sport",
+                "# of Years",
+                "Vegetarian"};
+    	
+    	Object[][] data = {
+    		    {"Kathy", "Smith",
+    		     "Snowboarding", 19, false},
+    		    {"John", "Doe",
+    		     "Rowing", 88, true},
+    		    {"Sue", "Black",
+    		     "Knitting", 94, false},
+    		    {"Jane", "White",
+    		     "Speed reading",20, true},
+    		    {"Joe", "Brown",
+    		     "Pool", 30, false},
+    		    {"Kathy", "Smith",
+        		"Snowboarding", 19, false},
+        		{"John", "Doe",
+        		 "Rowing", 88, true},
+        		{"Sue", "Black",
+        		"Knitting", 94, false},
+        		{"Jane", "White",
+        		"Speed reading",20, true},
+        		{"Joe", "Brown",
+        		 "Pool", 30, false},
+        		{"Sue", "Black",
+       		     "Knitting", 94, false},
+       		    {"Jane", "White",
+       		     "Speed reading",20, true},
+       		    {"Joe", "Brown",
+       		     "Pool", 30, false},
+       		    {"Kathy", "Smith",
+           		"Snowboarding", 19, false},
+           		{"John", "Doe",
+           		 "Rowing", 88, true},
+           		{"Sue", "Black",
+           		"Knitting", 94, false}
+    		};
+    	
+    	JTable table = new JTable(data, columnNames);
+    	JScrollPane scrollPane = new JScrollPane(table);
+    	table.setFillsViewportHeight(true);
+    	scrollPane.setBounds(30, 280, 430, 200);
+    	menu.add(scrollPane);
+    	setContentPane(menu);
+        revalidate();
+        repaint(); 
+        
+    	}
 
 
     public static void main(String[] args) {

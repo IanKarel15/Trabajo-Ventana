@@ -16,8 +16,8 @@ public class Ventana extends JFrame implements ActionListener {
     private JCheckBox chkRecordarContrasena;
     private JLabel etiqueta2;
     private JLabel etiqueta3;
-    private String correoB = "Iankarel@gmail.com";
-    private String contraseñaB = "12345";
+    private String correoB = "2";
+    private String contraseñaB = "1";
 
     public Ventana() {
         configurarVentana();
@@ -25,7 +25,7 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     private void configurarVentana() {
-        setSize(500, 600);
+        setSize(1000, 600);
         setTitle("Iniciar sesion");
         setLocationRelativeTo(null);
         setResizable(false);
@@ -61,6 +61,16 @@ public class Ventana extends JFrame implements ActionListener {
         panel.setLayout(null);
         setLocationRelativeTo(null);
         this.getContentPane().add(panel);
+        
+        JLabel imagen = new JLabel (new ImageIcon ("Logo.jpg"));
+        imagen.setBounds(470,30, 500, 500);
+        panel.add(imagen);
+        
+        JLabel fondo = new JLabel();
+        fondo.setBounds(450, 0, 600, 600);
+        fondo.setBackground(Color.BLACK);
+        fondo.setOpaque(true);
+        panel.add(fondo);
         
 
         // Etiqueta de título
@@ -360,28 +370,42 @@ public class Ventana extends JFrame implements ActionListener {
     public void panelMenu () {
     	
     	JPanel menu = new JPanel ();
-    	menu.setBackground(Color.LIGHT_GRAY);
+    	menu.setBackground(Color.BLUE);
     	menu.setLayout(null);
     	setContentPane(menu);
     	
-    	JLabel usuarios = new JLabel ("Usuarios");
+    	JLabel usuarios = new JLabel ("Twitter");
     	usuarios.setBounds(170, 30, 150, 40);
+    	usuarios.setFont(new Font("Helvetica", Font.BOLD, 45));
+    	usuarios.setForeground(Color.WHITE);
     	menu.add(usuarios);
-    	usuarios.setFont(new Font("Arial", Font.BOLD, 30));
+    	
     	
     	JLabel totalUsuarios = new JLabel ("Total de usuarios");
-    	totalUsuarios.setBounds(20, 80, 200, 40);
+    	totalUsuarios.setBounds(30, 110, 200, 30);
     	menu.add(totalUsuarios);
+    	totalUsuarios.setHorizontalAlignment(JTextField.CENTER);
+    	totalUsuarios.setOpaque(true);
     	totalUsuarios.setBackground(Color.BLACK);
     	totalUsuarios.setForeground(Color.WHITE);
     	totalUsuarios.setFont(new Font("Arial", Font.BOLD, 20));
     	
     	JLabel numUsuarios = new JLabel ("100");
-    	numUsuarios.setBounds(60, 120, 150, 40);
+    	numUsuarios.setBounds(30, 140, 200, 40);
     	menu.add(numUsuarios);
+    	numUsuarios.setHorizontalAlignment(JTextField.CENTER);
     	numUsuarios.setBackground(Color.BLACK);
+    	numUsuarios.setOpaque(true);
     	numUsuarios.setForeground(Color.WHITE);
     	numUsuarios.setFont(new Font("Arial", Font.BOLD, 30));
+    	
+    	JButton exportar = new JButton("Exportar");
+    	exportar.setBounds(230, 240, 100, 25);
+    	menu.add(exportar);
+    	
+    	JButton importar = new JButton("Importar");
+    	importar.setBounds(340, 240, 100, 25);
+    	menu.add(importar);
     	
     	String[] columnNames = {"First Name",
                 "Last Name",
@@ -421,13 +445,29 @@ public class Ventana extends JFrame implements ActionListener {
            		{"John", "Doe",
            		 "Rowing", 88, true},
            		{"Sue", "Black",
+           		"Knitting", 94, false},
+           		{"Jane", "White",
+        		"Speed reading",20, true},
+        		{"Joe", "Brown",
+        		 "Pool", 30, false},
+        		{"Sue", "Black",
+       		     "Knitting", 94, false},
+       		    {"Jane", "White",
+       		     "Speed reading",20, true},
+       		    {"Joe", "Brown",
+       		     "Pool", 30, false},
+       		    {"Kathy", "Smith",
+           		"Snowboarding", 19, false},
+           		{"John", "Doe",
+           		 "Rowing", 88, true},
+           		{"Sue", "Black",
            		"Knitting", 94, false}
     		};
     	
     	JTable table = new JTable(data, columnNames);
     	JScrollPane scrollPane = new JScrollPane(table);
     	table.setFillsViewportHeight(true);
-    	scrollPane.setBounds(30, 280, 430, 200);
+    	scrollPane.setBounds(30, 300, 430, 200);
     	menu.add(scrollPane);
     	setContentPane(menu);
         revalidate();

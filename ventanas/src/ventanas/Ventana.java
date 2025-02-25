@@ -12,7 +12,7 @@ public class Ventana extends JFrame implements ActionListener {
     private JLabel etiqueta;
     private JTextField campoCorreo;
     private JPasswordField campoContrasena;
-    private JButton botonIS,botonCrearCuenta;
+    private JButton botonIS;
     private JCheckBox chkRecordarContrasena;
     private JLabel etiqueta2;
     private JLabel etiqueta3;
@@ -22,6 +22,29 @@ public class Ventana extends JFrame implements ActionListener {
     public Ventana() {
         configurarVentana();
         inicializarComponentes();
+        JMenuBar barra = new JMenuBar();
+        barra.setSize(100, 20);
+        
+        JMenu menu1 = new JMenu("Archivo");
+        JMenu menu2 = new JMenu("Ayuda");
+        
+        JMenuItem item1 = new JMenuItem("Guardar");
+        JMenu menu3 = new JMenu("Guardar como:");
+        
+        JMenuItem item4 = new JMenuItem("PDF");
+        JMenuItem item5 = new JMenuItem("Word");
+        
+        menu3.add(item4);
+        menu3.add(item5);
+        
+        menu1.add(item1);
+        
+        menu1.add(menu3);
+        
+        barra.add(menu1);
+        barra.add(menu2);
+        
+        this.setJMenuBar(barra);
     }
 
     private void configurarVentana() {
@@ -41,9 +64,7 @@ public class Ventana extends JFrame implements ActionListener {
             etiqueta2.setText("Por favor, complete todos los campos");
             etiqueta2.setForeground(Color.RED);
         } else if (correo.equals(correoB) && contraseña.equals(contraseñaB) ){
-        	etiqueta2.setBounds(170, 360, 250, 25);
-            etiqueta2.setText("Inicio de sesion exitoso");
-            etiqueta2.setForeground(Color.GREEN);
+        	
             botonIS.addActionListener(e -> panelMenu());
             
         }
@@ -109,6 +130,8 @@ public class Ventana extends JFrame implements ActionListener {
         // Boton de inicio de sesion
         botonIS = new JButton("Iniciar sesión");
         botonIS.setBounds(180, 320, 120, 30);
+        botonIS.setBackground(Color.green);
+        botonIS.setForeground(Color.WHITE);
         panel.add(botonIS);
         botonIS.addActionListener(this);
         

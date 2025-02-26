@@ -1,11 +1,14 @@
 package ventanas;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Ventana extends JFrame implements ActionListener {
+public class Ventana extends JFrame  {
 
     private JPanel panel;
     private JPanel registro;
@@ -20,8 +23,11 @@ public class Ventana extends JFrame implements ActionListener {
     private String contraseñaB = "1";
 
     public Ventana() {
+    	
+    	
         configurarVentana();
-        inicializarComponentes();
+        layout1();
+        /*
         JMenuBar barra = new JMenuBar();
         barra.setSize(100, 20);
         
@@ -44,17 +50,70 @@ public class Ventana extends JFrame implements ActionListener {
         barra.add(menu1);
         barra.add(menu2);
         
-        this.setJMenuBar(barra);
+        this.setJMenuBar(barra);*/
     }
 
     private void configurarVentana() {
-        setSize(1000, 600);
+    	
+        setSize(500, 600);
         setTitle("Iniciar sesion");
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
+    private void layout1() {
+    	
+    	JPanel panel = new JPanel ();
+    	BorderLayout miBorderLayout = new BorderLayout();
+    	panel.setLayout(miBorderLayout);
+    	panel.setSize(500, 600);
+    	panel.setBackground(Color.BLACK);
+    	panel.setOpaque(true);
+    	this.getContentPane().add(panel);
+    	
+    	JLabel etiqueta = new JLabel("0");
+    	etiqueta.setFont(new Font("Arial", Font.BOLD, 80));
+    	etiqueta.setHorizontalAlignment(JTextField.RIGHT);
+    	etiqueta.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+    	
+    	add(etiqueta,BorderLayout.NORTH);
+    	
+    	JPanel numeros = new JPanel ();
+    	GridLayout miGridLayout = new GridLayout(5,4);
+    	numeros.setLayout(miGridLayout);
+    	panel.add(numeros,BorderLayout.CENTER);
+    	
+    	String[][] botones = {
+    			{"CE", "MC", "M+", "*"},
+                {"7", "8", "9", "+"},
+                {"4", "5", "6", "-"},
+                {"1", "2", "3", ""},
+                {"0", ".", "/", "="}
+            };
+    	
+    	for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 4; j++) {
 
+                JButton boton = new JButton(botones[i][j]);
+                
+                boton.setFont(new Font("Arial", Font.BOLD, 20));
+                boton.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+                if ("/*-+=.".contains(botones[i][j])) {
+                    boton.setBackground(new Color(255, 140, 0));
+                    boton.setForeground(Color.WHITE);
+                }
+                numeros.add(boton);
+                
+            }
+    	}
+    	
+    	
+    }
+    
+    
+
+    /*
     public void actionPerformed(ActionEvent accion) {
         String correo = campoCorreo.getText();
         String contraseña = new String(campoContrasena.getPassword());
@@ -131,7 +190,7 @@ public class Ventana extends JFrame implements ActionListener {
         botonIS = new JButton("Iniciar sesión");
         botonIS.setBounds(180, 320, 120, 30);
         botonIS.setBackground(Color.green);
-        botonIS.setForeground(Color.WHITE);
+        botonIS.setForeground(Color.black);
         panel.add(botonIS);
         botonIS.addActionListener(this);
         
@@ -150,12 +209,12 @@ public class Ventana extends JFrame implements ActionListener {
         etiqueta3.setForeground(Color.BLUE);
         panel.add(etiqueta3);
         
-        /*//Boton calculadora 
+        //Boton calculadora 
         
         JButton botonCal = new JButton("Calculadora");
         botonCal.setBounds(140, 460,200, 30);
         panel.add(botonCal);
-        botonCal.addActionListener(e -> panelCalculadora());*/
+        botonCal.addActionListener(e -> panelCalculadora());
         
         // Etiqueta de mensaje
         etiqueta2 = new JLabel("");
@@ -323,7 +382,7 @@ public class Ventana extends JFrame implements ActionListener {
     
     //panel calculadora
     
-    /*private void panelCalculadora() {
+    private void panelCalculadora() {
     	
         JPanel calculadora = new JPanel();
         calculadora.setBackground(Color.BLACK);
@@ -388,7 +447,7 @@ public class Ventana extends JFrame implements ActionListener {
         setContentPane(calculadora);
         revalidate();
         repaint();
-    }*/
+    }
     
     public void panelMenu () {
     	
@@ -496,11 +555,13 @@ public class Ventana extends JFrame implements ActionListener {
         revalidate();
         repaint(); 
         
-    	}
+    	}*/
 
 
     public static void main(String[] args) {
         Ventana v1 = new Ventana();
         v1.setVisible(true);
     }
+
+	
 }

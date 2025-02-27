@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
 import java.awt.event.*;
 
 public class Ventana extends JFrame  {
@@ -64,51 +66,71 @@ public class Ventana extends JFrame  {
     
     private void layout1() {
     	
-    	JPanel panel = new JPanel ();
-    	BorderLayout miBorderLayout = new BorderLayout();
-    	panel.setLayout(miBorderLayout);
-    	panel.setSize(500, 600);
-    	panel.setBackground(Color.BLACK);
-    	panel.setOpaque(true);
-    	this.getContentPane().add(panel);
-    	
-    	JLabel etiqueta = new JLabel("0");
-    	etiqueta.setFont(new Font("Arial", Font.BOLD, 80));
-    	etiqueta.setHorizontalAlignment(JTextField.RIGHT);
-    	etiqueta.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
-    	
-    	add(etiqueta,BorderLayout.NORTH);
-    	
-    	JPanel numeros = new JPanel ();
-    	GridLayout miGridLayout = new GridLayout(5,4);
-    	numeros.setLayout(miGridLayout);
-    	panel.add(numeros,BorderLayout.CENTER);
-    	
-    	String[][] botones = {
-    			{"CE", "MC", "M+", "*"},
-                {"7", "8", "9", "+"},
-                {"4", "5", "6", "-"},
-                {"1", "2", "3", ""},
-                {"0", ".", "/", "="}
-            };
-    	
-    	for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
+        // Panel principal
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(new BorderLayout());
+        panel.setSize(500, 600);
+        panel.setBorder(BorderFactory.createLineBorder(Color.white, 30));
+        panel.setOpaque(true);
+        this.getContentPane().add(panel);
 
-                JButton boton = new JButton(botones[i][j]);
-                
-                boton.setFont(new Font("Arial", Font.BOLD, 20));
-                boton.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
-                if ("/*-+=.".contains(botones[i][j])) {
-                    boton.setBackground(new Color(255, 140, 0));
-                    boton.setForeground(Color.WHITE);
-                }
-                numeros.add(boton);
-                
-            }
-    	}
-    	
-    	
+        // totulo
+        JLabel titulo = new JLabel("INTERES COMPUESTO");
+        titulo.setForeground(Color.RED);
+        titulo.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 25));
+        panel.add(titulo, BorderLayout.NORTH);
+
+        // Panel de calculo de interesesxdd
+        JPanel panel2 = new JPanel();
+        panel2.setBorder(BorderFactory.createTitledBorder("CALCULAR INTERESES"));
+        panel2.setBackground(new Color(240, 128, 128));
+        panel2.setOpaque(true);
+        panel2.setLayout(new GridLayout(4, 2, 10, 40));
+        panel.add(panel2, BorderLayout.CENTER);
+
+        // campos de entrada
+        JLabel lblCapital = new JLabel("CAPITAL: ", JLabel.CENTER);
+        panel2.add(lblCapital);
+        JTextField txtCapital = new JTextField("128913");
+        panel2.add(txtCapital);
+
+        JLabel lblTiempo = new JLabel("TIEMPO: ", JLabel.CENTER);
+        panel2.add(lblTiempo);
+        JTextField txtTiempo = new JTextField("128913");
+        panel2.add(txtTiempo);
+
+        JLabel lblTasaInteres = new JLabel("TASA DE INTERÉS: ", JLabel.CENTER);
+        panel2.add(lblTasaInteres);
+        JTextField txtTasaInteres = new JTextField("128913");
+        panel2.add(txtTasaInteres);
+
+        // botones
+        JButton btnCalcular = new JButton("CALCULAR");
+        panel2.add(btnCalcular);
+
+        JButton btnCancelar = new JButton("CANCELAR");
+        panel2.add(btnCancelar);
+
+        // panel de resultados
+        JPanel panel3 = new JPanel();
+        panel3.setBackground(new Color(144, 238, 144));
+        panel3.setBorder(BorderFactory.createLineBorder(new Color(144, 238, 144), 40));
+        panel3.setLayout(new GridLayout(2, 2, 20, 100));
+        panel.add(panel3, BorderLayout.PAGE_END);
+
+        // campos de salid
+        JLabel lblInteres = new JLabel("INTERES ", JLabel.CENTER);
+        panel3.add(lblInteres);
+        JTextField txtInteres = new JTextField("128913");
+        txtInteres.setHorizontalAlignment(JTextField.CENTER);
+        panel3.add(txtInteres);
+
+        JLabel lblMonto = new JLabel("MONTO ", JLabel.CENTER);
+        panel3.add(lblMonto);
+        JTextField txtMonto = new JTextField("128913");
+        txtMonto.setHorizontalAlignment(JTextField.CENTER);
+        panel3.add(txtMonto);
     }
     
     

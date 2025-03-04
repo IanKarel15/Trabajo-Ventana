@@ -4,11 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
-import java.awt.event.*;
+
 
 public class Ventana extends JFrame  {
 
@@ -29,6 +30,7 @@ public class Ventana extends JFrame  {
     	
         configurarVentana();
         layout1();
+        
         /*
         JMenuBar barra = new JMenuBar();
         barra.setSize(100, 20);
@@ -62,7 +64,13 @@ public class Ventana extends JFrame  {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        ImageIcon icono = new ImageIcon("Logo.jpg"); // Ruta de la imagen
+        setIconImage(icono.getImage());
+
     }
+    
+    
     
     private void layout1() {
     	
@@ -581,8 +589,9 @@ public class Ventana extends JFrame  {
 
 
     public static void main(String[] args) {
-        Ventana v1 = new Ventana();
-        v1.setVisible(true);
+        
+    	 Ventana v1 = new Ventana();
+    	 v1.setVisible(true);
     }
 
 	

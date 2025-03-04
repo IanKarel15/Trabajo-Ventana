@@ -4,8 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
+
 
 import javax.swing.*;
 
@@ -13,18 +12,7 @@ import javax.swing.*;
 
 public class Ventana extends JFrame  {
 
-    private JPanel panel;
-    private JPanel registro;
-    private JLabel etiqueta;
-    private JTextField campoCorreo;
-    private JPasswordField campoContrasena;
-    private JButton botonIS;
-    private JCheckBox chkRecordarContrasena;
-    private JLabel etiqueta2;
-    private JLabel etiqueta3;
-    private String correoB = "2";
-    private String contraseñaB = "1";
-
+  
     public Ventana() {
     	
     	
@@ -65,7 +53,7 @@ public class Ventana extends JFrame  {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        ImageIcon icono = new ImageIcon("Logo.jpg"); // Ruta de la imagen
+        ImageIcon icono = new ImageIcon("Logo.jpg"); 
         setIconImage(icono.getImage());
 
     }

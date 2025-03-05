@@ -1,8 +1,11 @@
 package ventanas;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 
 
@@ -17,8 +20,56 @@ public class Ventana extends JFrame  {
     	
     	
         configurarVentana();
-        layout1();
+       
         
+    }
+    
+    private void configurarVentana() {
+    	
+        setSize(500, 600);
+        setTitle("Iniciar sesion");
+        setLocationRelativeTo(null);
+        setResizable(false);
+        //setBackground(Color.BLACK);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+     
+    }
+    
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.setColor(Color.GREEN);
+        g2.fillRect(50, 50, 120, 30);
+        g2.fillRect(50, 80, 30, 70);
+        g2.fillRect(140, 80, 30, 70);
+
+        g2.setColor(Color.ORANGE);
+        g2.setFont(new Font("SansSerif", Font.BOLD, 35));
+        g2.drawString("Hola", 180, 70);
+
+        g2.setColor(Color.DARK_GRAY);
+        g2.drawLine(50, 50, 180, 220);
+
+        g2.setColor(Color.MAGENTA);
+        int[] xPoints = {50, 140, 200, 200};
+        int[] yPoints = {300, 180, 190, 130};
+        g2.fillPolygon(xPoints, yPoints, 4);
+
+        g2.setColor(Color.CYAN);
+        g2.fillArc(180, 220, 60, 60, 0, 120);
+        g2.drawArc(180, 220, 60, 60, 0, 120);
+
+        g2.setColor(Color.BLUE);
+        g2.setStroke(new BasicStroke(4));
+        g2.drawRect(300, 150, 120, 80);
+
+        g2.setColor(Color.BLACK);
+        g2.fillOval(200, 320, 40, 50);
+        g2.drawOval(240, 320, 40, 50);
+        }
         /*
         JMenuBar barra = new JMenuBar();
         barra.setSize(100, 20);
@@ -42,7 +93,7 @@ public class Ventana extends JFrame  {
         barra.add(menu1);
         barra.add(menu2);
         
-        this.setJMenuBar(barra);*/
+        this.setJMenuBar(barra);
     }
 
     private void configurarVentana() {
@@ -131,7 +182,7 @@ public class Ventana extends JFrame  {
     
     
 
-    /*
+    
     public void actionPerformed(ActionEvent accion) {
         String correo = campoCorreo.getText();
         String contraseña = new String(campoContrasena.getPassword());
@@ -292,7 +343,7 @@ public class Ventana extends JFrame  {
         registro.add(lblUbi);
         
         //lista desplegable
-        String [] ubicaciones ={"Camino real","Progreso", "Pueblo nuevo"};
+        String [] nacionalidad ={"Mexicana","Peruana", "PuertoRiqueña"};
         JComboBox listaDes = new JComboBox(ubicaciones);
         listaDes.setBounds(130, 320, 250, 25);
         registro.add(listaDes);

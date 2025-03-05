@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.List;
 import java.awt.TextArea;
@@ -59,6 +61,7 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(255, 255, 255), 4, true));
@@ -123,7 +126,12 @@ public class Principal extends JFrame {
 		rdbtnHombre.setBounds(191, 119, 103, 21);
 		panel_2.add(rdbtnHombre);
 		
-		JComboBox comboBox = new JComboBox();
+		ButtonGroup botonesSexo = new ButtonGroup();
+        botonesSexo.add(rdbtnHombre);
+        botonesSexo.add(rdbtnNewRadioButton);
+				
+        String [] nacionalidad ={"Mexicana","Peruana", "PuertoRiqueña"};
+		JComboBox comboBox = new JComboBox(nacionalidad);
 		comboBox.setToolTipText("hola");
 		comboBox.setBounds(106, 148, 147, 21);
 		panel_2.add(comboBox);
@@ -157,6 +165,8 @@ public class Principal extends JFrame {
 		label.setBackground(new Color(255, 255, 255));
 		label.setBounds(87, 44, 100, 110);
 		panel.add(label);
+		ImageIcon icono = new ImageIcon("user.png"); 
+        setIconImage(icono.getImage());
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(new Color(255, 255, 255), 3, true));

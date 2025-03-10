@@ -18,10 +18,12 @@ public class CasaDibujo extends JPanel {
         g.fillRect(0, 300, getWidth(), 200);
         g.setColor(new Color(34, 139, 34)); 
         g.fillRect(0, 300, getWidth(), 25);
+        
+         
     
         //pa pintar las cercas
         g.setColor(new Color(139, 69, 19));
-        g.fillRect(0, 225, 800, 40);
+        g.fillRect(0, 225, 900, 40);
         g.setColor(new Color(255, 180, 50));
         for (int i = 0; i < getWidth(); i += 50) {
             int[] x = {i, i + 20, i + 40};
@@ -29,6 +31,13 @@ public class CasaDibujo extends JPanel {
             g.fillPolygon(x, y, 3); //pico d las cercas
             g.fillRect(i, 200, 40, 100); //tabla d las cercas
         }
+      //arbolito
+        g.setColor(new Color(139, 69, 19));
+        g.fillRect(730, 150, 50, 150);
+        g.setColor(Color.GREEN);
+        g.fillOval(680, 100, 110, 100); 
+        g.fillOval(720, 100, 110, 100); 
+        g.fillOval(700, 80, 110, 100);
     
         //pintar casa y sus lineas
         g.setColor(new Color(255, 220, 120)); 
@@ -98,10 +107,12 @@ public class CasaDibujo extends JPanel {
         dibujarFlor(g, 400, 290);
         dibujarFlor(g, 550, 295);
         dibujarFlor(g, 670, 290);
+        dibujarFlor(g, 770, 295);
         
-        dibujarAve(g,600,100);
-        dibujarAve(g,650,125);
-        dibujarAve(g,550,125);
+        dibujarAve(g,600,125);
+        dibujarAve(g,500,125);
+        dibujarAve(g,550,100); 
+        
     }
 
     private void dibujarFlor(Graphics g, int x, int y) {
@@ -139,7 +150,7 @@ public class CasaDibujo extends JPanel {
         CasaDibujo panel = new CasaDibujo();
         
         ventana.add(panel);
-        ventana.setSize(800, 450);
+        ventana.setSize(900, 450);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setVisible(true);
     }

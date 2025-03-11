@@ -161,6 +161,33 @@ public class MarioWorld extends JPanel {
 			
 			e.printStackTrace();
 		}     
+		
+		BufferedImage image4;
+		try {
+			
+			image4 = ImageIO.read(new File("hola.png"));
+			
+			g.drawImage(image4, 
+					955, 352,
+					71,
+					71, null);
+		}catch (IOException e) {
+			
+			e.printStackTrace();
+		}     
+		BufferedImage image5;
+		try {
+			
+			image4 = ImageIO.read(new File("hola.png"));
+			
+			g.drawImage(image4, 
+					1030, 352,
+					71,
+					71, null);
+		}catch (IOException e) {
+			
+			e.printStackTrace();
+		}     
         
 
         //tierra y pasto

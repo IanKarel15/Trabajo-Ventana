@@ -13,10 +13,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-
-
-
-
 public class Ventana extends JFrame implements ActionListener {
 
 	 private JPanel panel;
@@ -104,6 +100,7 @@ public class Ventana extends JFrame implements ActionListener {
     
     
 
+    
     private void inicializarComponentes() {
     	
         panel = new JPanel();
@@ -185,6 +182,8 @@ public class Ventana extends JFrame implements ActionListener {
         registro.setBackground(Color.WHITE);
         registro.setLayout(null);
         setContentPane(registro);
+        JLabel error = new JLabel("");
+        registro.add(error);
         
         //boton back
         JButton botonBack = new JButton("Atras");
@@ -225,6 +224,11 @@ public class Ventana extends JFrame implements ActionListener {
         JLabel lblUbi = new JLabel("Ubicacion:");
         lblUbi.setBounds(50, 320, 100, 25);
         registro.add(lblUbi);
+      //lista desplegable
+        String [] ubicaciones ={"Camino real","Progreso", "Pueblo nuevo"};
+        JComboBox listaDes = new JComboBox(ubicaciones);
+        listaDes.setBounds(130, 320, 250, 25);
+        registro.add(listaDes);
         
         
         //label de Preferencias
@@ -247,7 +251,7 @@ public class Ventana extends JFrame implements ActionListener {
         registro.add(RBoton2);
         
         
-        JRadioButton RBoton3 = new JRadioButton("Terreneitor",false);
+        JRadioButton RBoton3 = new JRadioButton("Mucho xfa",false);
         RBoton3.setBounds(290, 270, 100, 25);
         RBoton3.setOpaque(false);
         registro.add(RBoton3);
@@ -293,6 +297,67 @@ public class Ventana extends JFrame implements ActionListener {
         botonCrearCuenta1.setBounds(140, 460, 200, 30);
         botonCrearCuenta1.setForeground(Color.BLUE);
         registro.add(botonCrearCuenta1);
+        botonCrearCuenta1.addActionListener(new ActionListener() {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        	
+        	String nombre = campoNombre.getText();
+        	String des = campoDes.getText();
+
+        	if (nombre.isEmpty() && des.isEmpty() ) {
+                
+            	campoNombre.setBorder(BorderFactory.createLineBorder(Color.RED,2));
+            	campoDes.setBorder(BorderFactory.createLineBorder(Color.RED,2));
+            	
+            	error.setText("Rellena los datos");
+                error.setForeground(Color.RED);
+                error.setBounds(130, 500, 200, 20);
+                
+            }
+        	else if (nombre.isEmpty() && !des.isEmpty() ) {
+                
+            	campoNombre.setBorder(BorderFactory.createLineBorder(Color.RED,2));
+            	campoDes.setBorder(BorderFactory.createLineBorder(Color.green,2));
+            	error.setText("Rellena el nombre");
+                error.setForeground(Color.RED);
+                error.setBounds(130, 500, 200, 20);
+            }
+        	else if(des.isEmpty() && !nombre.isEmpty()){
+            	campoDes.setBorder(BorderFactory.createLineBorder(Color.RED,2));
+            	campoNombre.setBorder(BorderFactory.createLineBorder(Color.green,2));
+            	error.setText("Rellena la descripcion");
+                error.setForeground(Color.RED);
+                error.setBounds(130, 500, 200, 20);
+            	
+            }   
+        	else if(!RBoton4.isSelected() && !RBoton5.isSelected()){
+        		error.setText("Acepta los terminos y condiciones");
+                error.setForeground(Color.RED);
+                error.setBounds(130, 500, 200, 20);
+      
+            }   
+        	else if(!RBoton4.isSelected() && !RBoton5.isSelected()){
+        		error.setText("Acepta los terminos y condiciones");
+                error.setForeground(Color.RED);
+                error.setBounds(130, 500, 200, 20);
+      
+            }
+        	else if(!RBoton1.isSelected() && !RBoton2.isSelected()&& !RBoton2.isSelected()){
+        		error.setText("Escoge tu sexo");
+                error.setForeground(Color.RED);
+                error.setBounds(130, 500, 200, 20);
+      
+            }   
+            else  {
+            	
+            	panelCuenta();
+            }
+
+            
+        	
+        }});
+        
         
      
         setContentPane(registro);

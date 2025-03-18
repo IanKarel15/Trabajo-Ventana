@@ -412,26 +412,53 @@ public class Ventana extends JFrame {
     }
     
     private void panelRecuperarC() {
+    	//crear panel 
         JPanel panelRecuperarC = new JPanel();
         panelRecuperarC.setBackground(Color.white);
         panelRecuperarC.setLayout(null);
         setContentPane(panelRecuperarC);
 
+        //etiqueta titulo
         JLabel etiquetaRC = new JLabel("Recuperar cuenta");
-        etiquetaRC.setBounds(100, 50, 300, 40);
+        etiquetaRC.setBounds(140, 50, 300, 40);
         etiquetaRC.setFont(new Font("Arial", Font.BOLD, 24));
         panelRecuperarC.add(etiquetaRC);
 
         JLabel correoLabel = new JLabel("Correo electrónico:");
-        correoLabel.setBounds(50, 120, 150, 30);
+        correoLabel.setBounds(50, 120, 150, 35);
+        correoLabel.setFont(new Font("Arial", Font.BOLD, 14));
         panelRecuperarC.add(correoLabel);
 
         JTextField correoField = new JTextField();
-        correoField.setBounds(200, 120, 200, 30);
+        correoField.setBounds(200, 120, 200, 35);
         panelRecuperarC.add(correoField);
+        
+        JLabel usuarioLabel = new JLabel("Usuario:");
+        usuarioLabel.setBounds(50, 200, 150, 35);
+        usuarioLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        panelRecuperarC.add(usuarioLabel);
 
-        JButton recuperarBtn = new JButton("Recuperar");
-        recuperarBtn.setBounds(150, 180, 150, 30);
+        JTextField usuarioField = new JTextField();
+        usuarioField.setBounds(200, 200, 200, 35);
+        panelRecuperarC.add(usuarioField);
+        
+      //Etiqueta de olvido su contrasaeña
+        JLabel lblOlvidoCorreo = new JLabel("¿Olvido su correo?");
+        lblOlvidoCorreo.setBounds(295, 152, 150, 20);
+        lblOlvidoCorreo.setFont(new Font("Arial", Font.BOLD, 10));
+        lblOlvidoCorreo.setForeground(Color.blue);
+        panelRecuperarC.add(lblOlvidoCorreo);
+        
+      //Etiqueta de olvido su contrasaeña
+        JLabel lblOlvidoUsuario = new JLabel("¿Olvido su usuario?");
+        lblOlvidoUsuario.setBounds(295, 235, 150, 20);
+        lblOlvidoUsuario.setFont(new Font("Arial", Font.BOLD, 10));
+        lblOlvidoUsuario.setForeground(Color.blue);
+        panelRecuperarC.add(lblOlvidoUsuario);
+
+
+        JButton recuperarBtn = new JButton("Mandar codigo");
+        recuperarBtn.setBounds(165, 310, 150, 40);
         panelRecuperarC.add(recuperarBtn);
 
         revalidate();
@@ -594,19 +621,24 @@ public class Ventana extends JFrame {
 
         JLabel etiquetaCrearU = new JLabel("¿Cómo crear un usuario?");
         etiquetaCrearU.setBounds(70, 20, 350, 40);
-        etiquetaCrearU.setFont(new Font("Arial", Font.BOLD, 30));
+        etiquetaCrearU.setFont(new Font("Arial", Font.BOLD, 27));
         panelCrearUsuario.add(etiquetaCrearU);
 
-        JLabel nombreLabel = new JLabel("Nombre:");
-        nombreLabel.setBounds(50, 100, 100, 30);
+        JLabel nombreLabel = new JLabel("Instrucciones:");
+        nombreLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        nombreLabel.setBounds(170, 90, 150, 30);
         panelCrearUsuario.add(nombreLabel);
+        
+        JLabel labelInstrucciones = new JLabel();
+        labelInstrucciones.setText("Para crear un usuario podra \n"+" hacerlo desde el menu de inicio en la ventana de inicio, para acceder a el pulse el siguiente boton");
+        labelInstrucciones.setFont(new Font("Arial", Font.BOLD, 14));
+        labelInstrucciones.setBounds(110, 110, 250, 100);
+        panelCrearUsuario.add(labelInstrucciones);
 
-        JTextField nombreField = new JTextField();
-        nombreField.setBounds(150, 100, 200, 30);
-        panelCrearUsuario.add(nombreField);
 
-        JButton crearButton = new JButton("Crear Usuario");
-        crearButton.setBounds(150, 150, 150, 40);
+        JButton crearButton = new JButton("Ir a registro");
+        crearButton.setBounds(165, 350, 150, 40);
+        crearButton.addActionListener(e -> panelRegistro());
         panelCrearUsuario.add(crearButton);
 
         revalidate();

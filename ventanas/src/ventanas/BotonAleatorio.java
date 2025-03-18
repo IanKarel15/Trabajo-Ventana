@@ -46,11 +46,8 @@ public class BotonAleatorio extends JFrame {
 	        	arreglo[1] = random.nextInt(600);
 	        	arreglo[2] = random.nextInt(50);
 	        	arreglo[3] = random.nextInt(40);
-	        	
-	        	int hola = arreglo[4] = random.nextInt(10000);
 
-	        	JButton botonA = new JButton ("hola");	
-	        	
+	        	JButton botonA = new JButton ("hola");		        	
 	        	botonA.setBounds(arreglo[0],arreglo[1],arreglo[2]+50,arreglo[3]+10);
 	        	Color colorA =onDraw();
 	        	botonA.setBackground(colorA);
@@ -62,12 +59,25 @@ public class BotonAleatorio extends JFrame {
 	        	botonA.addActionListener(new ActionListener() {
 	    	        
 	    	        public void actionPerformed(ActionEvent accion) {
-	    	        	JOptionPane.showMessageDialog(null, "El numero aleatorio es: ", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+	    	        	
+	    	        	Random random = new Random();
+	    	        	double hola = random.nextInt(1000000000);
+	    	       
+	    	        	JOptionPane.showMessageDialog(null, hola);   
+	    	        	
+	    	        	
+	    	        	
+	    	        	
 	    	            }});
+	        	
+	        	panel.repaint();
+	        	panel.revalidate();
 	        	
 	            }});
 		}
+	
 	public Color onDraw() {
+		
 	    Random r = new Random();
 	    Color randomColor = new Color( r.nextInt(256), r.nextInt(256), r.nextInt(256) );
 	    return randomColor;

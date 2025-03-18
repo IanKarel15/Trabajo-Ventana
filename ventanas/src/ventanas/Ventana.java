@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 
 public class Ventana extends JFrame {
@@ -81,6 +84,29 @@ public class Ventana extends JFrame {
         itemAccederSist.addActionListener(e -> panelAccederSis());
         itemOlvidarContr.addActionListener(e -> panelOlvidarContraseña());
         
+        //añadir accion al menu de pasar x encima
+        opcCuenta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	opcCuenta.doClick(); 
+            }
+        });
+        
+        opcUsuarios.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	opcUsuarios.doClick(); 
+            }
+        });
+        
+        opcAyuda.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	opcAyuda.doClick(); 
+            }
+        });
+        
+
         //añadir el Jmenu a la ventana
         setJMenuBar(barraOpciones);
 
@@ -131,9 +157,9 @@ public class Ventana extends JFrame {
 
         // Boton de inicio de sesion
         JButton botonIS = new JButton("Iniciar sesión");
-        botonIS.setBounds(180, 320, 120, 30);
-        botonIS.setBackground(Color.green);
-        botonIS.setForeground(Color.black);
+        botonIS.setBounds(130, 330, 220, 37);
+        botonIS.setBackground(Color.black);
+        botonIS.setForeground(Color.white);
         panelLogin.add(botonIS);
         
         //crear label de alerta
@@ -195,8 +221,9 @@ public class Ventana extends JFrame {
         
         //boton crear cuenta
         JButton botonCrearCuenta = new JButton("¿No tiene una cuenta? Cree una");
-        botonCrearCuenta.setBounds(130, 400, 220, 30);
-        botonCrearCuenta.setForeground(Color.BLUE);
+        botonCrearCuenta.setBounds(130, 400, 220, 37);
+        botonCrearCuenta.setBackground(Color.DARK_GRAY);
+        botonCrearCuenta.setForeground(Color.white);
         panelLogin.add(botonCrearCuenta);
         
         //añadir Accion al boton
@@ -385,60 +412,93 @@ public class Ventana extends JFrame {
     }
     
     private void panelRecuperarC() {
-    	
-    	//crear panel
-        JPanel panelRecuperarC = new JPanel ();
+        JPanel panelRecuperarC = new JPanel();
         panelRecuperarC.setBackground(Color.white);
         panelRecuperarC.setLayout(null);
         setContentPane(panelRecuperarC);
-        
-        //label de entrada
-        JLabel etiquetaRC = new JLabel ("Recuperar cuenta");
-        etiquetaRC.setBounds(70, 240, 350, 40);
-        etiquetaRC.setFont(new Font("Arial", Font.BOLD, 30));
-        panelRecuperarC.add(etiquetaRC); 
-        
-        //pintar panel
+
+        JLabel etiquetaRC = new JLabel("Recuperar cuenta");
+        etiquetaRC.setBounds(100, 50, 300, 40);
+        etiquetaRC.setFont(new Font("Arial", Font.BOLD, 24));
+        panelRecuperarC.add(etiquetaRC);
+
+        JLabel correoLabel = new JLabel("Correo electrónico:");
+        correoLabel.setBounds(50, 120, 150, 30);
+        panelRecuperarC.add(correoLabel);
+
+        JTextField correoField = new JTextField();
+        correoField.setBounds(200, 120, 200, 30);
+        panelRecuperarC.add(correoField);
+
+        JButton recuperarBtn = new JButton("Recuperar");
+        recuperarBtn.setBounds(150, 180, 150, 30);
+        panelRecuperarC.add(recuperarBtn);
+
         revalidate();
-        repaint();   
+        repaint();
     }
     
     private void panelAlta() {
-    	
-    	//crear panel
-        JPanel panelAlta = new JPanel ();
+        JPanel panelAlta = new JPanel();
         panelAlta.setBackground(Color.white);
         panelAlta.setLayout(null);
         setContentPane(panelAlta);
-        
-        //label de entrada
-        JLabel etiquetaAlta = new JLabel ("Dar cuenta de alta");
-        etiquetaAlta.setBounds(70, 240, 350, 40);
-        etiquetaAlta.setFont(new Font("Arial", Font.BOLD, 30));
-        panelAlta.add(etiquetaAlta); 
-        
-        //pintar panel
+
+        JLabel etiquetaAlta = new JLabel("Dar cuenta de alta");
+        etiquetaAlta.setBounds(100, 50, 300, 40);
+        etiquetaAlta.setFont(new Font("Arial", Font.BOLD, 24));
+        panelAlta.add(etiquetaAlta);
+
+        JLabel usuarioLabel = new JLabel("Usuario:");
+        usuarioLabel.setBounds(50, 120, 150, 30);
+        panelAlta.add(usuarioLabel);
+
+        JTextField usuarioField = new JTextField();
+        usuarioField.setBounds(200, 120, 200, 30);
+        panelAlta.add(usuarioField);
+
+        JLabel passLabel = new JLabel("Contraseña:");
+        passLabel.setBounds(50, 160, 150, 30);
+        panelAlta.add(passLabel);
+
+        JPasswordField passField = new JPasswordField();
+        passField.setBounds(200, 160, 200, 30);
+        panelAlta.add(passField);
+
+        JButton altaBtn = new JButton("Registrar");
+        altaBtn.setBounds(150, 220, 150, 30);
+        panelAlta.add(altaBtn);
+
         revalidate();
-        repaint();   
-    }  
+        repaint();
+    }
     
     private void panelBaja() {
     	
-    	//crear panel
-        JPanel panelBaja = new JPanel ();
+        JPanel panelBaja = new JPanel();
         panelBaja.setBackground(Color.white);
         panelBaja.setLayout(null);
         setContentPane(panelBaja);
-        
-        //label de entrada
-        JLabel etiquetaBaja = new JLabel ("Dar cuenta de baja");
-        etiquetaBaja.setBounds(70, 240, 350, 40);
-        etiquetaBaja.setFont(new Font("Arial", Font.BOLD, 30));
-        panelBaja.add(etiquetaBaja); 
-        
-        //pintar panel
+
+        JLabel etiquetaBaja = new JLabel("Dar cuenta de baja");
+        etiquetaBaja.setBounds(100, 50, 300, 40);
+        etiquetaBaja.setFont(new Font("Arial", Font.BOLD, 24));
+        panelBaja.add(etiquetaBaja);
+
+        JLabel usuarioLabel = new JLabel("Usuario a eliminar:");
+        usuarioLabel.setBounds(50, 120, 150, 30);
+        panelBaja.add(usuarioLabel);
+
+        JTextField usuarioField = new JTextField();
+        usuarioField.setBounds(200, 120, 200, 30);
+        panelBaja.add(usuarioField);
+
+        JButton bajaBtn = new JButton("Eliminar");
+        bajaBtn.setBounds(150, 180, 150, 30);
+        panelBaja.add(bajaBtn);
+
         revalidate();
-        repaint();   
+        repaint();
     }  
     
     private void panelConsultar() {
@@ -527,61 +587,93 @@ public class Ventana extends JFrame {
     }  
     
     private void panelCrearUsuario() {
-    	
-    	//crear panel
-        JPanel panelCrearUsuario = new JPanel ();
-        panelCrearUsuario.setBackground(Color.white);
+        JPanel panelCrearUsuario = new JPanel();
+        panelCrearUsuario.setBackground(new Color(173, 216, 230));
         panelCrearUsuario.setLayout(null);
         setContentPane(panelCrearUsuario);
-        
-        //label de entrada
-        JLabel etiquetaCrearU = new JLabel ("¿Cómo crear un usuario?");
-        etiquetaCrearU.setBounds(70, 240, 350, 40);
+
+        JLabel etiquetaCrearU = new JLabel("¿Cómo crear un usuario?");
+        etiquetaCrearU.setBounds(70, 20, 350, 40);
         etiquetaCrearU.setFont(new Font("Arial", Font.BOLD, 30));
-        panelCrearUsuario.add(etiquetaCrearU); 
-        
-        //pintar panel
+        panelCrearUsuario.add(etiquetaCrearU);
+
+        JLabel nombreLabel = new JLabel("Nombre:");
+        nombreLabel.setBounds(50, 100, 100, 30);
+        panelCrearUsuario.add(nombreLabel);
+
+        JTextField nombreField = new JTextField();
+        nombreField.setBounds(150, 100, 200, 30);
+        panelCrearUsuario.add(nombreField);
+
+        JButton crearButton = new JButton("Crear Usuario");
+        crearButton.setBounds(150, 150, 150, 40);
+        panelCrearUsuario.add(crearButton);
+
         revalidate();
-        repaint();   
-    }  
-    
+        repaint();
+    }
+
     private void panelAccederSis() {
-    	
-    	//crear panel
-        JPanel panelAccederSis = new JPanel ();
-        panelAccederSis.setBackground(Color.white);
+        JPanel panelAccederSis = new JPanel();
+        panelAccederSis.setBackground(new Color(144, 238, 144));
         panelAccederSis.setLayout(null);
         setContentPane(panelAccederSis);
-        
-        //label de entrada
-        JLabel etiquetaAccederSis = new JLabel ("¿Cómo acceder al sistema?");
-        etiquetaAccederSis.setBounds(70, 240, 350, 40);
+
+        JLabel etiquetaAccederSis = new JLabel("¿Cómo acceder al sistema?");
+        etiquetaAccederSis.setBounds(70, 20, 350, 40);
         etiquetaAccederSis.setFont(new Font("Arial", Font.BOLD, 30));
-        panelAccederSis.add(etiquetaAccederSis); 
-        
-        //pintar panel
+        panelAccederSis.add(etiquetaAccederSis);
+
+        JLabel usuarioLabel = new JLabel("Usuario:");
+        usuarioLabel.setBounds(50, 100, 100, 30);
+        panelAccederSis.add(usuarioLabel);
+
+        JTextField usuarioField = new JTextField();
+        usuarioField.setBounds(150, 100, 200, 30);
+        panelAccederSis.add(usuarioField);
+
+        JLabel contraseñaLabel = new JLabel("Contraseña:");
+        contraseñaLabel.setBounds(50, 140, 100, 30);
+        panelAccederSis.add(contraseñaLabel);
+
+        JPasswordField contraseñaField = new JPasswordField();
+        contraseñaField.setBounds(150, 140, 200, 30);
+        panelAccederSis.add(contraseñaField);
+
+        JButton accederButton = new JButton("Acceder");
+        accederButton.setBounds(150, 190, 150, 40);
+        panelAccederSis.add(accederButton);
+
         revalidate();
-        repaint();   
-    }  
-    
+        repaint();
+    }
+
     private void panelOlvidarContraseña() {
-    	
-    	//crear panel
-        JPanel panelOlvidarContraseña = new JPanel ();
-        panelOlvidarContraseña.setBackground(Color.white);
+        JPanel panelOlvidarContraseña = new JPanel();
+        panelOlvidarContraseña.setBackground(new Color(255, 182, 193));
         panelOlvidarContraseña.setLayout(null);
         setContentPane(panelOlvidarContraseña);
-        
-        //label de entrada
-        JLabel etiquetaOlvidarC = new JLabel ("¿Qué pasa si olvidé mi contraseña?");
-        etiquetaOlvidarC.setBounds(70, 240, 350, 40);
-        etiquetaOlvidarC.setFont(new Font("Arial", Font.BOLD, 30));
-        panelOlvidarContraseña.add(etiquetaOlvidarC); 
-        
-        //pintar panel
+
+        JLabel etiquetaOlvidarC = new JLabel("¿Qué pasa si olvidé mi contraseña?");
+        etiquetaOlvidarC.setBounds(50, 20, 400, 40);
+        etiquetaOlvidarC.setFont(new Font("Arial", Font.BOLD, 26));
+        panelOlvidarContraseña.add(etiquetaOlvidarC);
+
+        JLabel correoLabel = new JLabel("Correo Electrónico:");
+        correoLabel.setBounds(50, 100, 150, 30);
+        panelOlvidarContraseña.add(correoLabel);
+
+        JTextField correoField = new JTextField();
+        correoField.setBounds(200, 100, 200, 30);
+        panelOlvidarContraseña.add(correoField);
+
+        JButton recuperarButton = new JButton("Recuperar Contraseña");
+        recuperarButton.setBounds(150, 150, 200, 40);
+        panelOlvidarContraseña.add(recuperarButton);
+
         revalidate();
-        repaint();   
-    }  
+        repaint();
+    }
     
     private void panelCuenta() {
     	

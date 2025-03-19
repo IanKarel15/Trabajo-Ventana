@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class GatoRaton extends JFrame {
 	boolean turno = true;
+	int contador = 0;
 	JButton btnNewButton = new JButton("");
 	JButton btnNewButton_1 = new JButton("");
 	JButton btnNewButton_2 = new JButton("");
@@ -91,6 +92,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton.setEnabled(false);
             	verificar();
+            	contador++;
             	}
             }
         );
@@ -108,6 +110,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_1.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             }
         );
@@ -125,6 +128,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_2.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             }
         );
@@ -141,6 +145,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_3.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             }
         );
@@ -157,6 +162,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_4.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             }
         );
@@ -173,6 +179,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_5.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             }
         );
@@ -189,6 +196,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_6.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             }
         );
@@ -205,6 +213,7 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_7.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             
             }
@@ -222,46 +231,55 @@ public class GatoRaton extends JFrame {
             	}
             	btnNewButton_8.setEnabled(false);
             	verificar();
+            	contador++;
                 }
             }
         );
 
 	} 	
 	
+	private void ganador() {
+		if(turno) {
+			JOptionPane.showMessageDialog(null, "El ganador es O",
+	                "Ganador", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "El ganador es X",
+	                "Ganador", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
 	private void verificar () {
 		
-		if(btnNewButton.getText().equals(btnNewButton_3) && btnNewButton_3.getText().equals(btnNewButton_2) && !btnNewButton.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		if(contador == 8) {
+			JOptionPane.showMessageDialog(null, "El ganador es ninguno putos tontos",
+	                "Ganador", JOptionPane.INFORMATION_MESSAGE);
 		}
-		else if(btnNewButton_6.getText().equals(btnNewButton_4) && btnNewButton_4.getText().equals(btnNewButton_1) && !btnNewButton_6.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		else if(btnNewButton.getText().equals(btnNewButton_3.getText()) && btnNewButton_3.getText().equals(btnNewButton_2.getText()) && !btnNewButton.getText().equals("")) {
+			ganador();
 		}
-		else if(btnNewButton_5.getText().equals(btnNewButton_7) && btnNewButton_7.getText().equals(btnNewButton_8) && !btnNewButton_5.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		else if(btnNewButton_6.getText().equals(btnNewButton_4.getText()) && btnNewButton_4.getText().equals(btnNewButton_1.getText()) && !btnNewButton_6.getText().equals("")) {
+			ganador();
 		}
-		else if(btnNewButton.getText().equals(btnNewButton_6) && btnNewButton_6.getText().equals(btnNewButton_5) && !btnNewButton.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		else if(btnNewButton_5.getText().equals(btnNewButton_7.getText()) && btnNewButton_7.getText().equals(btnNewButton_8.getText()) && !btnNewButton_5.getText().equals("")) {
+			ganador();
 		}
-		else if(btnNewButton_3.getText().equals(btnNewButton_4) && btnNewButton_4.getText().equals(btnNewButton_7) && !btnNewButton_3.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		else if(btnNewButton.getText().equals(btnNewButton_6.getText()) && btnNewButton_6.getText().equals(btnNewButton_5.getText()) && !btnNewButton.getText().equals("")) {
+			ganador();
 		}
-		else if(btnNewButton_2.getText().equals(btnNewButton_1) && btnNewButton_1.getText().equals(btnNewButton_8) && !btnNewButton_2.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		else if(btnNewButton_3.getText().equals(btnNewButton_4.getText()) && btnNewButton_4.getText().equals(btnNewButton_7.getText()) && !btnNewButton_3.getText().equals("")) {
+			ganador();
 		}
-		else if(btnNewButton.getText().equals(btnNewButton_4) && btnNewButton_4.getText().equals(btnNewButton_8) && !btnNewButton.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		else if(btnNewButton_2.getText().equals(btnNewButton_1.getText()) && btnNewButton_1.getText().equals(btnNewButton_8.getText()) && !btnNewButton_2.getText().equals("")) {
+			ganador();
 		}
-		else if(btnNewButton_2.getText().equals(btnNewButton_4) && btnNewButton_4.getText().equals(btnNewButton_5) && !btnNewButton_2.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "Mensaje de información",
-	                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+		else if(btnNewButton.getText().equals(btnNewButton_4.getText()) && btnNewButton_4.getText().equals(btnNewButton_8.getText()) && !btnNewButton.getText().equals("")) {
+			ganador();
 		}
+		else if(btnNewButton_2.getText().equals(btnNewButton_4.getText()) && btnNewButton_4.getText().equals(btnNewButton_5.getText()) && !btnNewButton_2.getText().equals("")) {
+			ganador();
+			}
 		
 		
 	}

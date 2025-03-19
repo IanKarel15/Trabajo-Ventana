@@ -57,6 +57,7 @@ public class BotonAleatorio extends JFrame {
         botonA.setBackground(onDraw());
         botonA.setForeground(onDraw());
         panel.add(botonA);
+        
 
         panel.revalidate();
         panel.repaint();

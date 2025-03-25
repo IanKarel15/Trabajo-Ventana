@@ -46,7 +46,7 @@ public class GatoRaton extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
-	public JLabel lblNewLabel = new JLabel("JUGADOR X:0        ");
+	public JLabel lblNewLabel = new JLabel("JUGADOR  X:0        ");
 	public JLabel lblJugador = new JLabel("       JUGADOR O:0  ");
 	public JLabel lblContador = new JLabel("JUGADAS: 0  ");
 	
@@ -331,7 +331,7 @@ public class GatoRaton extends JFrame {
 	            		btnNewButton_8.setIcon(img2);
 	            		btnNewButton_8.setDisabledIcon(img2);
 	            	}
-	            	
+	            	btnNewButton_8.setEnabled(false);
 	            	verificar();
 	            	contador++;
 	                }

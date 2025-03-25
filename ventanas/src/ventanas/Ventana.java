@@ -614,6 +614,7 @@ public class Ventana extends JFrame {
     }  
     
     private void panelCrearUsuario() {
+    	
         JPanel panelCrearUsuario = new JPanel();
         panelCrearUsuario.setBackground(new Color(173, 216, 230));
         panelCrearUsuario.setLayout(null);
@@ -681,6 +682,7 @@ public class Ventana extends JFrame {
     }
 
     private void panelOlvidarContraseña() {
+    	
         JPanel panelOlvidarContraseña = new JPanel();
         panelOlvidarContraseña.setBackground(new Color(255, 182, 193));
         panelOlvidarContraseña.setLayout(null);

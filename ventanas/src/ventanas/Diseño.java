@@ -24,7 +24,6 @@ public class Diseño extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	JButton [][] botones = new JButton[4][4];
-	private int filaVacia , columnaVacia;
 	private int [] a = new int [16];
 	private JPanel panel_1 = new JPanel();
     private int segundos = 0;
@@ -33,14 +32,9 @@ public class Diseño extends JFrame {
     private Timer timer = new Timer();
     private boolean pausar = true;
     JButton btnPausar = new JButton("Pausar");
-	
-	
-	
 	private int [][]tablero =  new int[4][4];
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,16 +52,12 @@ public class Diseño extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	
-	
 
-    
-	
 	public void arreglos() {
+		
 		int num = 1;
 		reordenar();
-		
-		
+
         for (int fila = 0; fila < 4; fila++) {
             for (int columna = 0; columna < 4; columna++) {
                 if (num <= 15) {
@@ -77,8 +67,6 @@ public class Diseño extends JFrame {
                 	botones[fila][columna] = new JButton(String.valueOf(aux-1));
                 } else {
                     tablero[fila][columna] = 0; 
-                    filaVacia = fila;
-                    columnaVacia = columna;
                     botones[fila][columna] = new JButton("");
                 }
                 botones[fila][columna].setFont(new Font("Arial", Font.BOLD, 24));
@@ -93,9 +81,9 @@ public class Diseño extends JFrame {
             
         }
 	}
+	
 	public Diseño() {
 		
-		//diseño del juego
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 418);
 		contentPane = new JPanel();
@@ -107,25 +95,15 @@ public class Diseño extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 436, 380);
 		contentPane.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
-		
+		panel.setLayout(new BorderLayout(0, 0));		
 		
 		panel_1.setBackground(new Color(0, 255, 255));
 		panel_1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		panel.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(4, 4, 0, 0));
-		
-       
-        
-		
+
 		arreglos();
-		
-		
-		
-		
-		
-        
-        
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(0, 255, 255));
 		panel.add(panel_2, BorderLayout.NORTH);
@@ -137,16 +115,8 @@ public class Diseño extends JFrame {
 		btnReiniciar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent accion) {
             	panel_1.removeAll();
-                
-                
-                arreglos();
-                
-                
+                arreglos(); 
                 reiniciarTemporizador();
-                
-
-                
-                
                 panel_1.revalidate();
                 panel_1.repaint();               
             }
@@ -180,10 +150,7 @@ public class Diseño extends JFrame {
         lblTiempo.setFont(new Font("Arial", Font.BOLD, 20));
         lblTiempo.setBounds(150, 350, 100, 45);  
         panel_3.add(lblTiempo, BorderLayout.SOUTH);
-        
-                
-            
-        
+ 
 		TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -226,15 +193,10 @@ public class Diseño extends JFrame {
             pausar = true;
         }
     }
-        
-
-        
-	
 	
 	private void moverBoton(JButton boton1) {
 		
         int filaBoton = -1, columnaBoton = -1;
-        int aux;
 
         for (int fila = 0; fila < 4; fila++) {
             for (int columna = 0; columna < 4; columna++) {
@@ -331,14 +293,19 @@ public class Diseño extends JFrame {
 	        { 13, 14, 15, 0 } 
 	    };
 
-	    
-	    for (int fila = 0; fila < 4; fila++) {
-	        for (int columna = 0; columna < 4; columna++) {
-	            if (tablero[fila][columna] != tableroObjetivo[fila][columna]) {
-	                return false; 
-	            }
-	        }
-	    }
-	    return true; 
+	     if (botones[3][3].getText().equals("")) {
+	    	 
+	    	 for (int fila = 0; fila < 4; fila++) {
+	 	        for (int columna = 0; columna < 4; columna++) {
+	 	            if (tablero[fila][columna] != tableroObjetivo[fila][columna]) {
+	 	                return false; 
+	 	            }
+	 	        }
+	 	    }
+	 	    return true;
+	     }
+	     else {
+	    	 return false;
+	     }
 	}
 }

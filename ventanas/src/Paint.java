@@ -19,8 +19,11 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     private Color colorActual = Color.BLACK;
     private ArrayList<Color> coloresArray = new ArrayList<>();
     private ArrayList<Integer> grosores = new ArrayList<>();
-    int valor;
+    private ArrayList<Figura> figuras = new ArrayList<>();
+    int valor,tipo;
     int grosorActual;
+    boolean xd;
+    private Point puntoInicio,puntoFinal;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -59,15 +62,20 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         btnTriangulo.setBounds(84, 34, 50, 50);
         panel.add(btnTriangulo);
 
-        Image imgTriangulo = new ImageIcon("variante-de-contorno-de-triangulo.png").getImage()
+        Image imgTriangulo = new ImageIcon("triangulo (4).png").getImage()
             .getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         btnTriangulo.setIcon(new ImageIcon(imgTriangulo));
         btnTriangulo.setBorderPainted(false); 
         btnTriangulo.setFocusPainted(false);  
         btnTriangulo.setContentAreaFilled(false);
 
-        btnTriangulo.setHorizontalAlignment(SwingConstants.CENTER);
-        btnTriangulo.setVerticalAlignment(SwingConstants.CENTER);
+        btnTriangulo.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        tipo = 2;
+		        xd = true;
+		        
+		    }
+		});
 
 
         JButton btnLinea = new JButton("");
@@ -81,8 +89,13 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
             .getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         btnLinea.setIcon(new ImageIcon(imgLinea));
 
-        btnLinea.setHorizontalAlignment(SwingConstants.CENTER);
-        btnLinea.setVerticalAlignment(SwingConstants.CENTER);
+        btnLinea.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	tipo = 3;
+		    	xd = true;
+		        
+		    }
+		});
 
 
         JButton btnCirculo = new JButton("");
@@ -96,9 +109,15 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         Image imgCirculo = new ImageIcon("registro.png").getImage()
             .getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         btnCirculo.setIcon(new ImageIcon(imgCirculo));
-
-        btnCirculo.setHorizontalAlignment(SwingConstants.CENTER);
-        btnCirculo.setVerticalAlignment(SwingConstants.CENTER);
+        btnCirculo.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	tipo = 1;
+		    	xd = true;
+		    	
+		        
+		    }
+		});
+        
 
 
         JButton btnCuadrado = new JButton("");
@@ -111,9 +130,13 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         Image imgCuadrado = new ImageIcon("cuadrado (2).png").getImage()
             .getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         btnCuadrado.setIcon(new ImageIcon(imgCuadrado));
-
-        btnCuadrado.setHorizontalAlignment(SwingConstants.CENTER);
-        btnCuadrado.setVerticalAlignment(SwingConstants.CENTER);
+        btnCuadrado.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	tipo = 4;
+		        xd = true;
+		        
+		    }
+		});
         
         JButton btnNewButton_4 = new JButton("Lapiz");
         btnNewButton_4.setBackground(new Color(255, 255, 255));
@@ -124,6 +147,8 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         btnNewButton_4.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        cambiarColor(Color.BLACK);
+		        xd = false;
+		        tipo =0;
 		    }
 		});
         
@@ -136,10 +161,11 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         btnNewButton_4_1.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        cambiarColor(Color.WHITE);
+		        xd  = false;
 		    }
 		});
         
-        JSlider slider = new JSlider(0, 30, 2);
+        JSlider slider = new JSlider(0, 40, 2);
         slider.setBackground(new Color(255, 255, 255));
         slider.setBounds(500, 42, 175, 26);
         panel.add(slider);
@@ -173,11 +199,13 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         panel.add(btnNewButton_4_2);
         btnNewButton_4_2.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        puntos.clear();;
-		        listaDePuntos.clear();;
+		    	puntos.clear();
+		        listaDePuntos.clear();
 		        coloresArray.clear();
-		        grosores.clear();;
+		        grosores.clear();
+		        figuras.clear();
 		        repaint();
+		        
 		    }
 		});
         
@@ -188,15 +216,24 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
 
         panel.add(btnNewButton_4_2_1);
         btnNewButton_4_2_1.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        
-		        int i = listaDePuntos.size() - 1;
-	            listaDePuntos.remove(i);
-	            coloresArray.remove(i);
-	            grosores.remove(i);
-		        repaint();
-		    }
-		});
+            public void actionPerformed(ActionEvent e) {
+                if (!xd) {
+                    if (!listaDePuntos.isEmpty()) {
+                        int i = listaDePuntos.size() - 1;
+                        listaDePuntos.remove(i);
+                        coloresArray.remove(i);
+                        grosores.remove(i);
+                        repaint();
+                    }
+                } else {
+                    if (!figuras.isEmpty()) {
+                        int i = figuras.size() - 1;
+                        figuras.remove(i);
+                        repaint();
+                    }
+                }
+            }
+        });
         
         JLabel lblHerramientas_1 = new JLabel("HERRAMIENTAS");
         lblHerramientas_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -254,8 +291,10 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseDragged(MouseEvent e) {
-    	panelDibujo.repaint();
-    	puntos.add(e.getPoint());
+    	if(!xd) {
+    		panelDibujo.repaint();
+        	puntos.add(e.getPoint());
+    	}
         
     }
     private void cambiarGrosor(int G) {
@@ -269,16 +308,37 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        listaDePuntos.add(new ArrayList<>(puntos));
-        puntos.clear();
-        coloresArray.add(colorActual);
-        grosores.add(grosorActual);
+        if(tipo == 3 ) {
+        	
+        	puntoFinal = e.getPoint();
+        	figuras.add(new Figura(puntoInicio.x, puntoInicio.y, puntoFinal.x, puntoFinal.y, tipo));
+        	
+        }
+        else
+        {
+        	listaDePuntos.add(new ArrayList<>(puntos));
+            puntos.clear();
+            coloresArray.add(colorActual);
+            grosores.add(grosorActual);
+        }
         panelDibujo.repaint();
     }
 
     @Override public void mouseMoved(MouseEvent e) {}
-    @Override public void mouseClicked(MouseEvent e) {}
-    @Override public void mousePressed(MouseEvent e) {}
+    @Override public void mouseClicked(MouseEvent e) {
+        if (xd) {
+            if (tipo == 2) {
+                FiguraTriangulo ft = new FiguraTriangulo(e.getX(), e.getY(), 80, 80, tipo);
+                figuras.add(ft);
+            } else if (tipo != 3) { 
+                Figura f = new Figura(e.getX(), e.getY(), 80, 80, tipo);
+                figuras.add(f);
+            }
+        }
+    }
+    @Override public void mousePressed(MouseEvent e) {
+    	puntoInicio = e.getPoint();
+    }
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
 
@@ -299,6 +359,9 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 dibujarTrazo(g2, listaDePuntos.get(i));
                 
             }
+            
+            
+            
             g2.setColor(colorActual); 
         	BasicStroke grosor = new BasicStroke(grosorActual);
             g2.setStroke(grosor);
@@ -315,8 +378,66 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 Point p2 = trazo.get(i);
                 g2.drawLine(p1.x, p1.y, p2.x, p2.y);
             }
+        	for (Figura f : figuras) { 
+        		
+        		if(f.tipo == 1) {
+        			g2.drawOval(f.x, f.y, f.ancho, f.alto);
+        		}
+        		else if	(f.tipo == 2) {
+        			
+        			if (f instanceof FiguraTriangulo) {
+                        FiguraTriangulo ft = (FiguraTriangulo) f;
+                        g2.drawPolygon(ft.vx1, ft.vy1, 3);
+                    }
+                    
+        		} 
+        			
+        		else if	(f.tipo == 3) {
+        			g2.drawLine(f.x, f.y, f.ancho, f.alto);
+        		}
+        			
+
+        		else if	(f.tipo == 4) {
+        			
+        			g2.drawRect(f.x, f.y, f.ancho, f.alto);
+        		}
+                
+               
+            }
+        	
+        	
+        	
         }
     }
+    
+    class Figura {
+    	
+    	int x,y,ancho,alto,tipo;
+    	
+    	public Figura (int x,int y, int ancho,int alto,int tipo) {
+    		this.x = x;
+    		this.y = y;
+    		this.ancho = ancho;
+    		this.alto = alto;
+    		this.tipo = tipo;
+    		
+    		
+    	}
+    }
+    
+    class FiguraTriangulo extends Figura {
+
+    	int [] vx1 ;
+        int [] vy1 ;
+        
+		public FiguraTriangulo(int x, int y, int ancho, int alto, int tipo) {
+			super(x, y, ancho, alto, tipo);
+			this.vx1 = new int[]{x, x - 80, x + ancho};
+	        this.vy1 = new int[]{y, y+alto, y + alto};
+		}
+    	
+    }
 }
+
 
 

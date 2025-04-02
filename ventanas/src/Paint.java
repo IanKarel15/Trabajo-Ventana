@@ -25,6 +25,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     boolean xd;
     private Point puntoInicio,puntoFinal;
     private boolean rellenar =false;
+    int ancho=80, alto=80;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -269,11 +270,36 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         JButton btnNewButton_4_2_2 = new JButton("Rellenar");
         btnNewButton_4_2_2.setFocusPainted(false);
         btnNewButton_4_2_2.setBackground(Color.WHITE);
-        btnNewButton_4_2_2.setBounds(277, 41, 86, 21);
+        btnNewButton_4_2_2.setBounds(277, 72, 86, 21);
         panel.add(btnNewButton_4_2_2);
         btnNewButton_4_2_2.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        cambiarRellenar();
+		    }
+		});
+        
+        JButton btnNewButton_4_2_2_1 = new JButton("-");
+        btnNewButton_4_2_2_1.setFocusPainted(false);
+        btnNewButton_4_2_2_1.setBackground(Color.WHITE);
+        btnNewButton_4_2_2_1.setBounds(277, 41, 86, 21);
+        panel.add(btnNewButton_4_2_2_1);
+        btnNewButton_4_2_2_1.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	ancho-=2;
+		    	alto-=2;
+		        
+		    }
+		});
+        
+        JButton btnNewButton_4_2_2_2 = new JButton("+");
+        btnNewButton_4_2_2_2.setFocusPainted(false);
+        btnNewButton_4_2_2_2.setBackground(Color.WHITE);
+        btnNewButton_4_2_2_2.setBounds(277, 10, 86, 21);
+        panel.add(btnNewButton_4_2_2_2);
+        btnNewButton_4_2_2_2.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	ancho+=2;
+		    	alto+=2;
 		    }
 		});
 
@@ -348,10 +374,10 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     @Override public void mouseClicked(MouseEvent e) {
         if (xd) {
             if (tipo == 2) {
-                FiguraTriangulo ft = new FiguraTriangulo(e.getX(), e.getY(), 80, 80, tipo,colorActual,grosorActual,rellenar);
+                FiguraTriangulo ft = new FiguraTriangulo(e.getX(), e.getY(), ancho, alto, tipo,colorActual,grosorActual,rellenar);
                 figuras.add(ft);
             } else if (tipo != 3) { 
-                Figura f = new Figura(e.getX(), e.getY(), 80, 80, tipo,colorActual,grosorActual,rellenar);
+                Figura f = new Figura(e.getX(), e.getY(), ancho, alto, tipo,colorActual,grosorActual,rellenar);
                 figuras.add(f);
             }
         }
@@ -374,32 +400,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
             Graphics2D g2 = (Graphics2D) g;
             
             
-            for (int i = 0; i < listaDePuntos.size(); i++) {
-            	g2.setStroke(new BasicStroke(grosores.get(i)));
-            	g2.setColor(coloresArray.get(i));
-                dibujarTrazo(g2, listaDePuntos.get(i));
-                
-            }
-            
-            
-            
-            g2.setColor(colorActual); 
-        	BasicStroke grosor = new BasicStroke(grosorActual);
-            g2.setStroke(grosor);
-            dibujarTrazo(g2, puntos);
-            
-            
-        }
-
-        private void dibujarTrazo(Graphics2D g2, List<Point> trazo) {
-        	 
-        	for (int i = 1; i < trazo.size(); i++) {
-        		
-                Point p1 = trazo.get(i - 1);
-                Point p2 = trazo.get(i);
-                g2.drawLine(p1.x, p1.y, p2.x, p2.y);
-            }
-        	for (Figura f : figuras) { 
+            for (Figura f : figuras) { 
         		g2.setStroke(new BasicStroke(f.grosor));
             	g2.setColor(f.color);
             	
@@ -445,7 +446,33 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         		
                
             }
-        	panelDibujo.repaint();        	
+            for (int i = 0; i < listaDePuntos.size(); i++) {
+            	g2.setStroke(new BasicStroke(grosores.get(i)));
+            	g2.setColor(coloresArray.get(i));
+                dibujarTrazo(g2, listaDePuntos.get(i));
+                
+            }
+            
+            g2.setColor(colorActual); 
+        	BasicStroke grosor = new BasicStroke(grosorActual);
+            g2.setStroke(grosor);
+            dibujarTrazo(g2, puntos);
+            
+            
+            
+            
+        }
+
+        private void dibujarTrazo(Graphics2D g2, List<Point> trazo) {
+        	 
+        	for (int i = 1; i < trazo.size(); i++) {
+        		
+                Point p1 = trazo.get(i - 1);
+                Point p2 = trazo.get(i);
+                g2.drawLine(p1.x, p1.y, p2.x, p2.y);
+            }
+        	
+        	
         	
         	
         }

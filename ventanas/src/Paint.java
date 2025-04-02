@@ -24,6 +24,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     int grosorActual;
     boolean xd;
     private Point puntoInicio,puntoFinal;
+    private boolean rellenar =false;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -39,7 +40,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     public Paint() {
     	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1000, 727);
+        setBounds(100, 100, 1125, 727);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(0, 128, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,7 +49,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
 
         JPanel panel = new JPanel();
         panel.setBackground(new Color(255, 255, 255));
-        panel.setBounds(10, 22, 966, 103);
+        panel.setBounds(10, 22, 1091, 103);
         contentPane.add(panel);
         panel.setLayout(null);
         
@@ -140,7 +141,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         
         JButton btnNewButton_4 = new JButton("Lapiz");
         btnNewButton_4.setBackground(new Color(255, 255, 255));
-        btnNewButton_4.setBounds(390, 32, 85, 21);
+        btnNewButton_4.setBounds(480, 34, 85, 21);
         btnNewButton_4.setFocusPainted(false);  
 
         panel.add(btnNewButton_4);
@@ -154,7 +155,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         
         JButton btnNewButton_4_1 = new JButton("Borrador");
         btnNewButton_4_1.setBackground(new Color(255, 255, 255));
-        btnNewButton_4_1.setBounds(390, 63, 85, 21);
+        btnNewButton_4_1.setBounds(480, 63, 85, 21);
         btnNewButton_4_1.setFocusPainted(false);  
 
         panel.add(btnNewButton_4_1);
@@ -167,7 +168,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         
         JSlider slider = new JSlider(0, 40, 2);
         slider.setBackground(new Color(255, 255, 255));
-        slider.setBounds(500, 42, 175, 26);
+        slider.setBounds(611, 48, 175, 26);
         panel.add(slider);
         
         slider.addChangeListener(new ChangeListener() {  
@@ -183,18 +184,18 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         JLabel lblColores = new JLabel("COLORES");
         lblColores.setFont(new Font("Tahoma", Font.BOLD, 14));
         lblColores.setHorizontalAlignment(SwingConstants.CENTER);
-        lblColores.setBounds(738, 0, 184, 31);
+        lblColores.setBounds(881, 0, 184, 31);
         panel.add(lblColores);
 
         JPanel panelColores = new JPanel(new GridLayout(3, 3, 7, 5));
         panelColores.setBackground(new Color(255, 255, 255));
         panelColores.setBorder(UIManager.getBorder("Button.border"));
-        panelColores.setBounds(710, 30, 235, 62);
+        panelColores.setBounds(830, 31, 235, 62);
         panel.add(panelColores);
         
         JButton btnNewButton_4_2 = new JButton("Limpiar");
         btnNewButton_4_2.setBackground(new Color(255, 255, 255));
-        btnNewButton_4_2.setBounds(288, 32, 85, 21);
+        btnNewButton_4_2.setBounds(385, 34, 85, 21);
         btnNewButton_4_2.setFocusPainted(false);  
         panel.add(btnNewButton_4_2);
         btnNewButton_4_2.addActionListener(new ActionListener() {
@@ -211,7 +212,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         
         JButton btnNewButton_4_2_1 = new JButton("Atras");
         btnNewButton_4_2_1.setBackground(new Color(255, 255, 255));
-        btnNewButton_4_2_1.setBounds(288, 63, 85, 21);
+        btnNewButton_4_2_1.setBounds(385, 63, 85, 21);
         btnNewButton_4_2_1.setFocusPainted(false);  
 
         panel.add(btnNewButton_4_2_1);
@@ -238,32 +239,43 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         JLabel lblHerramientas_1 = new JLabel("HERRAMIENTAS");
         lblHerramientas_1.setHorizontalAlignment(SwingConstants.CENTER);
         lblHerramientas_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblHerramientas_1.setBounds(291, 0, 184, 31);
+        lblHerramientas_1.setBounds(381, 0, 184, 31);
         panel.add(lblHerramientas_1);
         
         JLabel lblHerramientas_1_1 = new JLabel("GROSOR");
         lblHerramientas_1_1.setHorizontalAlignment(SwingConstants.CENTER);
         lblHerramientas_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblHerramientas_1_1.setBounds(491, 0, 184, 31);
+        lblHerramientas_1_1.setBounds(602, 0, 184, 31);
         panel.add(lblHerramientas_1_1);
         
         JPanel panel_1_2 = new JPanel();
         panel_1_2.setLayout(null);
         panel_1_2.setBackground(Color.LIGHT_GRAY);
-        panel_1_2.setBounds(270, 7, 2, 90);
+        panel_1_2.setBounds(373, 7, 2, 90);
         panel.add(panel_1_2);
         
         JPanel panel_1_2_1 = new JPanel();
         panel_1_2_1.setLayout(null);
         panel_1_2_1.setBackground(Color.LIGHT_GRAY);
-        panel_1_2_1.setBounds(490, 7, 2, 90);
+        panel_1_2_1.setBounds(589, 7, 2, 90);
         panel.add(panel_1_2_1);
         
         JPanel panel_1_2_2 = new JPanel();
         panel_1_2_2.setLayout(null);
         panel_1_2_2.setBackground(Color.LIGHT_GRAY);
-        panel_1_2_2.setBounds(685, 7, 2, 90);
+        panel_1_2_2.setBounds(808, 7, 2, 90);
         panel.add(panel_1_2_2);
+        
+        JButton btnNewButton_4_2_2 = new JButton("Rellenar");
+        btnNewButton_4_2_2.setFocusPainted(false);
+        btnNewButton_4_2_2.setBackground(Color.WHITE);
+        btnNewButton_4_2_2.setBounds(277, 41, 86, 21);
+        panel.add(btnNewButton_4_2_2);
+        btnNewButton_4_2_2.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        cambiarRellenar();
+		    }
+		});
 
         Color[] colores = {Color.WHITE, Color.BLACK, Color.GRAY, Color.BLUE, Color.RED,
                 Color.GREEN, Color.YELLOW, Color.ORANGE, Color.PINK};   
@@ -283,7 +295,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
         }
 
         panelDibujo = new PaintPanel();
-        panelDibujo.setBounds(14, 140, 960, 535);
+        panelDibujo.setBounds(14, 140, 1085, 535);
         contentPane.add(panelDibujo);
         panelDibujo.addMouseListener(this);
         panelDibujo.addMouseMotionListener(this);
@@ -305,13 +317,21 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     private void cambiarColor(Color nuevoColor) {
         colorActual = nuevoColor;
     }
+    private void cambiarRellenar() {
+        rellenar = !rellenar;
+        repaint();
+        
+        
+    }
+    
+    
 
     @Override
     public void mouseReleased(MouseEvent e) {
         if(tipo == 3 ) {
         	
         	puntoFinal = e.getPoint();
-        	figuras.add(new Figura(puntoInicio.x, puntoInicio.y, puntoFinal.x, puntoFinal.y, tipo));
+        	figuras.add(new Figura(puntoInicio.x, puntoInicio.y, puntoFinal.x, puntoFinal.y, tipo,colorActual,grosorActual,rellenar));
         	
         }
         else
@@ -328,10 +348,10 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     @Override public void mouseClicked(MouseEvent e) {
         if (xd) {
             if (tipo == 2) {
-                FiguraTriangulo ft = new FiguraTriangulo(e.getX(), e.getY(), 80, 80, tipo);
+                FiguraTriangulo ft = new FiguraTriangulo(e.getX(), e.getY(), 80, 80, tipo,colorActual,grosorActual,rellenar);
                 figuras.add(ft);
             } else if (tipo != 3) { 
-                Figura f = new Figura(e.getX(), e.getY(), 80, 80, tipo);
+                Figura f = new Figura(e.getX(), e.getY(), 80, 80, tipo,colorActual,grosorActual,rellenar);
                 figuras.add(f);
             }
         }
@@ -345,6 +365,7 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     class PaintPanel extends JPanel {
         public PaintPanel() {
             this.setBackground(Color.white);
+            
         }
 
         @Override
@@ -379,32 +400,52 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
                 g2.drawLine(p1.x, p1.y, p2.x, p2.y);
             }
         	for (Figura f : figuras) { 
-        		
+        		g2.setStroke(new BasicStroke(f.grosor));
+            	g2.setColor(f.color);
+            	
         		if(f.tipo == 1) {
-        			g2.drawOval(f.x, f.y, f.ancho, f.alto);
+        			if(f.rellenar)
+        				g2.fillOval(f.x, f.y, f.ancho, f.alto);
+        			else
+        				g2.drawOval(f.x, f.y, f.ancho, f.alto);
         		}
-        		else if	(f.tipo == 2) {
         			
-        			if (f instanceof FiguraTriangulo) {
-                        FiguraTriangulo ft = (FiguraTriangulo) f;
-                        g2.drawPolygon(ft.vx1, ft.vy1, 3);
-                    }
+        		if(f.tipo == 2) {
+        			
+        			if(f.rellenar) {
+	        			if (f instanceof FiguraTriangulo) {
+	                        FiguraTriangulo ft = (FiguraTriangulo) f;
+	                        g2.fillPolygon(ft.vx1, ft.vy1, 3);
+	                        
+	                    }
+	        		}
+	        		else {
+	        			if (f instanceof FiguraTriangulo) {
+	                        FiguraTriangulo ft = (FiguraTriangulo) f;
+	                        g2.drawPolygon(ft.vx1, ft.vy1, 3);
+	                        
+	                    }
+	        		}
                     
-        		} 
+        		}
+        		
+        		
         			
-        		else if	(f.tipo == 3) {
+        		if	(f.tipo == 3) {
+        			
         			g2.drawLine(f.x, f.y, f.ancho, f.alto);
-        		}
         			
-
-        		else if	(f.tipo == 4) {
-        			
-        			g2.drawRect(f.x, f.y, f.ancho, f.alto);
         		}
-                
+        		if(f.tipo==4) {
+        			if(f.rellenar)
+        				g2.fillRect(f.x, f.y, f.ancho, f.alto);
+        			else
+        				g2.drawRect(f.x, f.y, f.ancho, f.alto);
+        		}
+        		
                
             }
-        	
+        	panelDibujo.repaint();        	
         	
         	
         }
@@ -412,14 +453,20 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     
     class Figura {
     	
-    	int x,y,ancho,alto,tipo;
+    	int x,y,ancho,alto,tipo,grosor;
+    	Color color;
+    	boolean rellenar;
     	
-    	public Figura (int x,int y, int ancho,int alto,int tipo) {
+    	
+    	public Figura (int x,int y, int ancho,int alto,int tipo,Color color,int grosor,Boolean rellenar) {
     		this.x = x;
     		this.y = y;
     		this.ancho = ancho;
     		this.alto = alto;
     		this.tipo = tipo;
+    		this.color=color;
+    		this.grosor=grosor;
+    		this.rellenar= rellenar;
     		
     		
     	}
@@ -430,8 +477,8 @@ public class Paint extends JFrame implements MouseListener, MouseMotionListener 
     	int [] vx1 ;
         int [] vy1 ;
         
-		public FiguraTriangulo(int x, int y, int ancho, int alto, int tipo) {
-			super(x, y, ancho, alto, tipo);
+		public FiguraTriangulo(int x, int y, int ancho, int alto, int tipo,Color color,int grosor,boolean rellenar) {
+			super(x, y, ancho, alto, tipo,color,grosor,rellenar);
 			this.vx1 = new int[]{x, x - 80, x + ancho};
 	        this.vy1 = new int[]{y, y+alto, y + alto};
 		}

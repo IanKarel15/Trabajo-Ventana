@@ -33,7 +33,31 @@ public class Keyboard2 extends JFrame implements KeyListener {
     JButton btnPausar = new JButton("Pausar");
     private Player player;
     private ArrayList<Player> obstaculos = new ArrayList<>();
-
+    private String direccionActual = "";
+    private Timer movimientoTimer;
+    
+    int[][] mapa = {
+    	    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    	    {1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+    	    {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1},
+    	    {1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+    	    {1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1},
+    	    {1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+    	    {1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1},
+    	    {1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    	    {1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1},
+    	    {1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1},
+    	    {1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+    	    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1},
+    	    {1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    	    {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    	    {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
+    	    {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
+    	    {1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
+    	    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    	    {1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    	    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    	};
 	/**
 	 * Launch the application.
 	 */
@@ -62,16 +86,25 @@ public class Keyboard2 extends JFrame implements KeyListener {
 	 */
 	public Keyboard2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 780, 430);
+		setBounds(100, 100, 930, 600);
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		player =new Player(350, 150, 30, 30,Color.GREEN);
-		obstaculos.add(new Player(250, 50, 230, 30, Color.RED));
-        obstaculos.add(new Player(250, 250, 230, 30, Color.RED));
-        obstaculos.add(new Player(50, 50, 30, 200, Color.RED));
-        obstaculos.add(new Player(650, 50, 30, 200, Color.RED));
+		player =new Player(20, 20, 10, 10,Color.GREEN);
+		
+		int anchoCelda = 20;
+		int altoCelda = 20;
+
+		for (int fila = 0; fila < mapa.length; fila++) {
+		    for (int col = 0; col < mapa[0].length; col++) {
+		        if (mapa[fila][col] == 1) {
+		            int x = col * anchoCelda ;
+		            int y = fila * altoCelda ; 
+		            obstaculos.add(new Player(x, y, anchoCelda, altoCelda, Color.RED));
+		        }
+		    }
+		}
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -129,6 +162,61 @@ public class Keyboard2 extends JFrame implements KeyListener {
 		        reiniciarTemporizador();
 		        }
 		});
+		
+		movimientoTimer = new Timer();
+		movimientoTimer.scheduleAtFixedRate(new TimerTask() {
+		    @Override
+		    public void run() {
+		        moverJugador();
+		    }
+		}, 0, 5);
+	}
+	
+	private void moverJugador() {
+	    int nuevaX = player.x;
+	    int nuevaY = player.y;
+	    int paso = 1;
+
+	    switch (direccionActual) {
+	        case "DERECHA":
+	            nuevaX += paso;
+	            break;
+	        case "IZQUIERDA":
+	            nuevaX -= paso;
+	            break;
+	        case "ABAJO":
+	            nuevaY += paso;
+	            break;
+	        case "ARRIBA":
+	            nuevaY -= paso;
+	            break;
+	        default:
+	            return;
+	    }
+
+	    Player temporal = new Player(nuevaX, nuevaY, player.w, player.h, player.c);
+	    boolean hayColision = false;
+
+	    for (Player obstaculo : obstaculos) {
+	        if (temporal.colisionaCon(obstaculo)) {
+	            hayColision = true;
+	            break;
+	        }
+	    }
+
+	    if (!hayColision) {
+	        player.x = nuevaX;
+	        player.y = nuevaY;
+	    }
+
+	    
+	    if (player.x >= panel_1.getWidth()) player.x = -player.w;
+	    else if (player.x + player.w <= 0) player.x = panel_1.getWidth();
+
+	    if (player.y >= panel_1.getHeight()) player.y = -player.h;
+	    else if (player.y + player.h <= 0) player.y = panel_1.getHeight();
+
+	    panel_1.repaint();
 	}
 	
 	class PaintPanel extends JPanel {
@@ -141,16 +229,13 @@ public class Keyboard2 extends JFrame implements KeyListener {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             
-            
-            g.setColor(player.c);
-            g.fillRect(player.x, player.y, player.w, player.h);
+            player.dibujar(g);
+
             
             for (Player obs : obstaculos) {
-                g.setColor(obs.c);
-                g.fillRect(obs.x, obs.y, obs.w, obs.h);
+                obs.dibujar(g);
             }
-    
-            
+              
         }
         
 	}
@@ -173,6 +258,10 @@ public class Keyboard2 extends JFrame implements KeyListener {
 		               this.y < otro.y + otro.h &&
 		               this.y + this.h > otro.y;
 		    }
+		 public void dibujar(Graphics g) {
+			    g.setColor(c);
+			    g.fillRect(x, y, w, h);
+			}
 		
 	}
 
@@ -182,51 +271,19 @@ public class Keyboard2 extends JFrame implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-	    int nuevaX = player.x;
-	    int nuevaY = player.y;
-	    int paso = 10;
-
 	    int code = e.getKeyCode();
+
 	    if (code == KeyEvent.VK_D) {
-	        nuevaX += paso;
+	        direccionActual = "DERECHA";
 	    } else if (code == KeyEvent.VK_A) {
-	        nuevaX -= paso;
+	        direccionActual = "IZQUIERDA";
 	    } else if (code == KeyEvent.VK_S) {
-	        nuevaY += paso;
+	        direccionActual = "ABAJO";
 	    } else if (code == KeyEvent.VK_W) {
-	        nuevaY -= paso;
+	        direccionActual = "ARRIBA";
 	    }
 
-	    Player temporal = new Player(nuevaX, nuevaY, player.w, player.h, player.c);
-
-	    boolean hayColision = false;
-	    
-	    for (Player pared : obstaculos) {
-	        if (temporal.colisionaCon(pared)) {
-	            hayColision = true;
-	            break;
-	        }
-	    }
-
-	    if (!hayColision) {
-	        player.x = nuevaX;
-	        player.y = nuevaY;
-	    }
-        if (player.x >= panel_1.getWidth()) {
-            player.x = -player.w;  
-        } else if (player.x + player.w <= 0) {
-            player.x = panel_1.getWidth();  
-        }
-        if (player.y >= panel_1.getHeight()) {
-            player.y = -player.h;  
-        } else if (player.y + player.h <= 0) {
-            player.y = panel_1.getHeight();  
-        }
-        
-        panel_1.repaint();
-        
-        System.out.println("x = " + player.x + ", y = " + player.y);
-		
+	    System.out.println("Dirección actual: " + direccionActual);
 	}
 	
 	public void reiniciarTemporizador() {
